@@ -28,7 +28,7 @@ public class InventoryController {
                         System.out.print("Enter item name: ");
                         String name = scanner.nextLine();
                         System.out.print("Enter rarity as its corresponding number (COMMON - 0, GREAT - 1, RARE - 2, EPIC - 3, LEGENDARY - 4): ");
-                        
+
                         int r = scanner.nextInt();
                         scanner.nextLine(); // Consume newline
 
@@ -39,7 +39,10 @@ public class InventoryController {
                             model.CreateItem(name, x);
                         } else {
                             try {
-                                Rarity rarity = new Rarity(r);
+                                if (r < 0 || r >= Rarity.values().length) {
+                                    throw new IllegalArgumentException("Invalid rarity input.");
+                                }
+                                Rarity rarity = Rarity.values()[r];
                                 model.CreateItem(name, rarity);
                             } catch (IllegalArgumentException e) {
                                 System.out.println("Invalid rarity input. Try again.");

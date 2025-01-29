@@ -1,7 +1,4 @@
 import java.util.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class Inventory {
     private ArrayList<Item> inventory;
@@ -12,18 +9,18 @@ public class Inventory {
 
     public ArrayList<Item> getInventory() { return inventory; }
 
-    public void CreateItem(String name, int epicness){
+    public void CreateItem(String name, int epicness) {
         Item item = new Item(name, epicness);
         inventory.add(item);
     }
 
-    public Item CreateItem(String name, Rarity rarity){
+    public Item CreateItem(String name, Rarity rarity) {
         Item item = new Item(name, rarity);
         inventory.add(item);
         return item;
     }
 
-    public Item randomGenerateItem(String name){
+    public Item randomGenerateItem(String name) {
         WeightedRandom wRandom = new WeightedRandom();
         Item item = new Item(name, wRandom.giveRandom());
         inventory.add(item);
@@ -40,11 +37,11 @@ public class Inventory {
 
     public ArrayList<Item> sortByRarity() {
         ArrayList<Item> raritySorted = new ArrayList<>(inventory);
-        raritySorted.sort(Comparator.comparing(item -> item.getRarity()));
+        raritySorted.sort(Comparator.comparing(Item::getRarity));
         return raritySorted;
     }
 
-    public void upgradeItem(int index1, int index2, int index3){
+    public void upgradeItem(int index1, int index2, int index3) {
         if (!isValidIndex(index1) || !isValidIndex(index2) || !isValidIndex(index3)) {
             throw new IndexOutOfBoundsException("Invalid index(es) provided.");
         }
@@ -53,7 +50,7 @@ public class Inventory {
         Item mod1 = inventory.get(index2);
         Item mod2 = inventory.get(index3);
 
-        if (original.getRarity().equals("Legendary")) 
+        if (original.getRarity() == Rarity.LEGENDARY) 
             throw new IllegalArgumentException("Max rarity reached, cannot upgrade.");
 
         if (!original.getName().equals(mod1.getName()) || !original.getName().equals(mod2.getName())) 
@@ -63,7 +60,7 @@ public class Inventory {
             original.getRarity() != mod2.getRarity()) 
             throw new IllegalArgumentException("All items must have the same rarity.");
 
-        if (original.getRarity().equals("Epic") && 
+        if (original.getRarity() == Rarity.EPIC && 
             (original.getEpicCounter() != mod1.getEpicCounter() || 
              original.getEpicCounter() != mod2.getEpicCounter() || 
              original.getEpicCounter() != 2)) {
@@ -89,7 +86,7 @@ public class Inventory {
         Item original = inventory.get(index1);
         Item mod1 = inventory.get(index2);
 
-        if (!original.getRarity().equals("Epic")) 
+        if (original.getRarity() != Rarity.EPIC) 
             throw new IllegalArgumentException("Only epic items can be upgraded.");
 
         if (!original.getName().equals(mod1.getName())) 

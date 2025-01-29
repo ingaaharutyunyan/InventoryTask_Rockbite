@@ -13,7 +13,7 @@ Things I missed out on:
 I ran out of time to implement a data storage class, but I have done this before!!
 I would have either made a class from scratch that would store the raw data (string, int) in a json file, or I would have installed a package that would do that for me
 
-I also probably missed out on some exception cases (eg how to react when someone tries to upgrade inventory with itself?) so sorry about that, and I also should have converted the thrown exceptions into strings so the program can continue running instead of throwing an exception and stopping the program.
+I also probably missed out on some edge cases (eg how to react when someone tries to upgrade inventory with itself?) so sorry about that, and I also should have converted the thrown exceptions into strings so the program can continue running instead of throwing an exception and stopping the program.
 
 Thank you for your time and I look forward to hearing from you!!
 (Please let me know what I could improve on too if that's ok)
